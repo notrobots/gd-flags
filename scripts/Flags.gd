@@ -16,6 +16,13 @@ static func flag(index: int) -> int:
 static func has_flag(value: int, flag: int) -> bool:
 	return value & flag
 
+# Returns whether or not all flags on a are also set on b
+static func has_flags(a: int, b: int) -> bool:
+	for flag in get_flags(a):
+		if not has_flag(b, flag):
+			return false
+	return true
+
 # Returns all set flags on the given value.
 static func get_flags(value: int) -> Array:
 	var flags = []
