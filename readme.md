@@ -36,8 +36,8 @@ Flags.unset_flag(flags, FLAG_A) # 1010
 print(Flags.has_flag(flags, FLAG_A))   
 # Output: true
 
-print(Flags.get_flags(flags))   
+print(Flags.get_flags(Sample, flags))
 # Output: [2, 8]
 print(Flags.get_flags_names(Sample, flags))   
 # Output: [FLAG_B, FLAG_D]
-```
+``````

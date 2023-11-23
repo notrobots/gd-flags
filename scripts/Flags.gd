@@ -24,27 +24,22 @@ static func has_flags(a: int, b: int) -> bool:
 	return true
 
 # Returns all set flags on the given value.
-static func get_flags(value: int) -> Array:
+static func get_flags(_flags: Dictionary, value: int) -> Array:
 	var flags = []
 
-	for i in range(get_value_length(value)):
-		var flag = 1 << i
-
-		if has_flag(value, flag):
-			flags.append(flag)
+	for flag in _flags:
+		if has_flag(value, _flags[flag]):
+			flags.append(_flags[flag])
 
 	return flags
 
 # Returns the names of all set flags on the given value.
-static func get_flags_names(flags: Dictionary, value: int) -> Array:
-	var bits = get_flags(value)
+static func get_flags_names(_flags: Dictionary, value: int) -> Array:
 	var names = []
 
-	for bit in bits:
-		var name = flags.find_key(bit)
-
-		if name:
-			names.append(name)
+	for flag in _flags:
+		if has_flag(value, _flags[flag]):
+			names.append(flag)
 
 	return names
 
@@ -56,10 +51,3 @@ static func collect(flags: Array[int]) -> int:
 		value = set_flag(value, flag)
 
 	return value
-
-# Returns the given value's length in base 2.
-static func get_value_length(value: int) -> int:
-	if value > 64 && value % 2 != 0:
-		return floor(log(value) / log(2)) + 2
-	else:
-		return floor(log(value) / log(2)) + 1
