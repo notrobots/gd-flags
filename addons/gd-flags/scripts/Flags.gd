@@ -1,37 +1,49 @@
 class_name Flags
 
+# Sets the given flag on the given value and returns the new value.
+static func setf(value: int, flag: int) -> int:
+	return value | flag
+
 # Unsets the given flag on the given value and returns the new value.
-static func unset_flag(value: int, flag: int) -> int:
+static func unsetf(value: int, flag: int) -> int:
 	return value & ~flag
 
-# Sets the given flag on the given value and returns the new value.
-static func set_flag(value: int, flag: int) -> int:
-	return value | flag
+# Sets the given bit on the given value and returns the new value.
+static func setb(value: int, bit: int) -> int:
+	return setf(value, 1 << bit)
+
+# Unsets the given bit on the given value and returns the new value.
+static func unsetb(value: int, bit: int) -> int:
+	return unsetf(value, 1 << bit)
 
 # Creates a flag with the given index
 static func flag(index: int) -> int:
 	return 1 << index
 
 # Returns whether or not the given flag is set on the value.
-static func has_flag(value: int, flag: int) -> bool:
+static func hasf(value: int, flag: int) -> bool:
 	return value & flag
 
+# Returns whether or not the given bit is set on the value.
+static func hasb(value: int, bit: int) -> bool:
+	return hasf(value, 1 << bit)
+
 # Returns all set flags on the given value.
-static func get_flags(_flags: Dictionary, value: int) -> Array:
-	var flags = []
+static func list(flags: Dictionary, value: int) -> Array:
+	var _flags = []
 
 	for flag in _flags:
-		if has_flag(value, _flags[flag]):
-			flags.append(_flags[flag])
+		if hasf(value, flags[flag]):
+			_flags.append(flags[flag])
 
-	return flags
+	return _flags
 
 # Returns the names of all set flags on the given value.
-static func get_flags_names(_flags: Dictionary, value: int) -> Array:
+static func names(flags: Dictionary, value: int) -> Array:
 	var names = []
 
-	for flag in _flags:
-		if has_flag(value, _flags[flag]):
+	for flag in flags:
+		if hasf(value, flags[flag]):
 			names.append(flag)
 
 	return names
@@ -41,6 +53,6 @@ static func collect(flags: Array[int]) -> int:
 	var value = 0
 
 	for flag in flags:
-		value = set_flag(value, flag)
+		value = setf(value, flag)
 
 	return value

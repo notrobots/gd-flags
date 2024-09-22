@@ -7,7 +7,7 @@
 
 ## Installation
 
-Clone/Download the project into `<your_project>/addons`
+Clone/Download the repo and copy the `gd-flags/addons/gd-flags` folder into `<your_project>/addons`
 
 ## Usage
 
@@ -21,23 +21,23 @@ enum Sample {
 
 var flags = Flags.collect(FLAG_A, FLAG_B)   # 0011
 
-print(Flags.has_flag(flags, FLAG_A))   
+print(Flags.hasf(flags, FLAG_A))   
 # Output: true
-print(Flags.has_flag(flags, FLAG_C))   
+print(Flags.hasf(flags, FLAG_C))   
 # Output: false
 
-Flags.set_flag(flags, FLAG_D)   # 1011
+Flags.setf(flags, FLAG_D)   # 1011
 
-print(Flags.has_flag(flags, FLAG_D))   
+print(Flags.hasf(flags, FLAG_D))   
 # Output: true
 
-Flags.unset_flag(flags, FLAG_A) # 1010
+Flags.unsetf(flags, FLAG_A) # 1010
 
-print(Flags.has_flag(flags, FLAG_A))   
+print(Flags.hasf(flags, FLAG_A))   
 # Output: true
 
-print(Flags.get_flags(Sample, flags))
+print(Flags.list(Sample, flags))
 # Output: [2, 8]
-print(Flags.get_flags_names(Sample, flags))   
+print(Flags.names(Sample, flags))   
 # Output: [FLAG_B, FLAG_D]
 ``````
